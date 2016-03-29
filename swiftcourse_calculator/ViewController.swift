@@ -39,7 +39,7 @@ class ViewController: UIViewController {
             operation = "="
         }
     }
-
+    
     @IBOutlet weak var resultLabel: UILabel!
     
     @IBAction func percentButton(sender: AnyObject) {
@@ -53,7 +53,16 @@ class ViewController: UIViewController {
     }
     
     @IBAction func changeOperate(sender: AnyObject) {
-            displayValue = -displayValue
+//       let displayValueString = String(displayValue)
+        let searchCharacter = "-"
+        
+        if ((resultLabel.text?.containsString(searchCharacter)) == true){
+            resultLabel.text?.removeAtIndex((resultLabel.text?.startIndex)!)
+        }else {
+            resultLabel.text?.insert("-", atIndex: (resultLabel.text?.startIndex)!)
+            firstDigit = false
+        }
+
     }
     
     @IBAction func saveOperand(sender: UIButton) {
@@ -64,6 +73,7 @@ class ViewController: UIViewController {
         if operation != "=" {
             operandArray.append(operandA)
             operationArray.append(operation)
+            resultLabel.text = ""
             }
     }
     
@@ -102,7 +112,11 @@ class ViewController: UIViewController {
     @IBAction func numberButton(sender: UIButton) {
          let digit = sender.currentTitle!
          resultLabel.text = firstDigit ? digit : resultLabel.text! + digit
-         firstDigit = false
+            firstDigit = false
+//        if let number = sender.currentTitle {
+//            resultLabel.text = resultLabel.text! + number
+        
+
     }
  
 
